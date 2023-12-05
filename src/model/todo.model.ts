@@ -1,5 +1,5 @@
-import mongoose, { Types } from "mongoose";
-interface ITodo {
+import mongoose, { Document, Schema, Types, model } from "mongoose";
+export interface ITodo {
   title: string;
   description: string;
   status: boolean;
@@ -9,9 +9,13 @@ interface ITodo {
   updatedAt?: Date;
   done: boolean;
   priority: string;
+  color?: string;
+  library: Types.ObjectId;
 }
 
-const TodoSchema = new mongoose.Schema(
+export interface ITodoDocument extends ITodo, Document {}
+
+export const TodoSchema = new Schema<ITodoDocument>(
   {
     title: { type: String, required: true },
     description: { type: String },
@@ -20,8 +24,11 @@ const TodoSchema = new mongoose.Schema(
     user: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
     done: { type: Boolean, default: false },
     priority: { type: String, default: "low" },
+    color: { type: String },
+    library: { type: mongoose.Schema.Types.ObjectId, ref: "Library" },
   },
   { timestamps: true }
 );
 
-const Todo = mongoose.model<ITodo & mongoose.Document>("Todo", TodoSchema);
+export const TodoModel =
+  mongoose.models.Todo || model<ITodoDocument>("Todo", TodoSchema);
