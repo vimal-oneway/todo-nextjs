@@ -1,4 +1,4 @@
-import mongoose, { Schema, Types } from "mongoose";
+import mongoose, { Document, Schema, Types } from "mongoose";
 
 import "./library.model";
 import "./todo.model";
@@ -13,7 +13,9 @@ interface IUser {
   todos: [Types.ObjectId];
 }
 
-export const UserSchema = new Schema(
+export interface IUserDocument extends IUser, Document {}
+
+export const UserSchema = new Schema<IUserDocument>(
   {
     email: { type: String, required: true },
     name: { type: String, required: true },
@@ -24,6 +26,5 @@ export const UserSchema = new Schema(
   { timestamps: true }
 );
 
-export const User =
-  mongoose.models.User ||
-  mongoose.model<IUser & mongoose.Document>("User", UserSchema);
+export const UserModel =
+  mongoose.models.User || mongoose.model<IUserDocument>("User", UserSchema);

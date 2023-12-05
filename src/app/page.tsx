@@ -1,20 +1,26 @@
-"use client";
-import { AddTodo } from "@/components/AddTodo";
+import { getTodo } from "@/actions/getTodo";
+import { AddTodo } from "@/components/todo/AddTodo";
 import { Container } from "@/components/Container";
 import { Navbar } from "@/components/Navbar";
-import { useSession } from "next-auth/react";
-import { useEffect } from "react";
+import { TodoCard } from "@/components/todo/TodoCard";
+import { TodoContainer } from "@/components/todo/TodoContainer";
 
-export default function Home() {
-  const { data } = useSession();
-  useEffect(() => {
-    console.log(data);
-  }, [data]);
+export default async function Home() {
+  const todos = await getTodo();
+
+  if (!todos) {
+    return <div>Loading...</div>;
+  }
+
   return (
     <>
       <Navbar />
       <Container>
-        dssfdf
+        <TodoContainer>
+          {todos.map((todo) => {
+            return <TodoCard todo={todo} key={todo._id} />;
+          })}
+        </TodoContainer>
         <AddTodo />
       </Container>
     </>
