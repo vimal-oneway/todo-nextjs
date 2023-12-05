@@ -19,9 +19,8 @@ export const Navbar = () => {
             />
             <h1 className="text-2xl md:text-4xl font-bold">Todo</h1>
           </div>
-          <div></div>
-          {/* <Dropdown /> */}
-          <div className="w-8 avatar  rounded-full ring-2 ring-blue-500 ">
+          <Dropdown />
+          {/* <div className="w-8 avatar  rounded-full ring-2 ring-blue-500 ">
             <Image
               src={data?.user?.image || "/user.png"}
               alt="user-avatar"
@@ -29,7 +28,7 @@ export const Navbar = () => {
               height={"12"}
               className="rounded-full"
             />
-          </div>
+          </div> */}
         </section>
       </div>
     </div>

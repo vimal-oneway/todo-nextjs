@@ -10,15 +10,18 @@ type TodoDoneBtnProps = {
 
 export const TodoDoneBtn = ({ done, id }: TodoDoneBtnProps) => {
   const [isLoading, setIsLoading] = useState(false);
+  const [checked, setChecked] = useState(done);
 
   return (
     <input
       type="checkbox"
-      defaultChecked={done}
+      defaultChecked={checked}
       onClick={() => {
+        setChecked(!checked);
         setIsLoading(true);
         if (isLoading) return;
-        todoDone(id)
+
+        todoDone(id, !checked)
           .then(() => {
             setIsLoading(false);
           })

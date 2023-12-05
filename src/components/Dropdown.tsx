@@ -1,6 +1,6 @@
 "use client";
 import { Menu } from "@headlessui/react";
-import { useSession } from "next-auth/react";
+import { signOut, useSession } from "next-auth/react";
 import Image from "next/image";
 import { useState } from "react";
 
@@ -27,13 +27,18 @@ export function Dropdown() {
         </div>
       </div>
       {open && (
-        <div className="absolute px-3 py-2 ring-2 top-14 right-0 ring-blue-500 rounded-lg">
-          <button className="border border-blue-300 my-2 w-full rounded-md px-3 py-1 text-blue-200 font-semibold hover:bg-blue-400 hover:text-black transition-all">
-            Collections
+        <div className="absolute px-2 ring-2 top-14 right-0 ring-blue-500 rounded-lg">
+          <button
+            className="my-2 w-full rounded-md px-3 py-1 text-blue-200 font-semibold hover:bg-blue-400 hover:text-black transition-all"
+            onClick={() => {
+              signOut();
+            }}
+          >
+            Logout
           </button>
-          <button className="border border-blue-300 my-2 w-full rounded-md px-3 py-1 text-blue-200 font-semibold hover:bg-blue-400 hover:text-black transition-all">
+          {/* <button className="border border-blue-300 my-2 w-full rounded-md px-3 py-1 text-blue-200 font-semibold hover:bg-blue-400 hover:text-black transition-all">
             Todo
-          </button>
+          </button> */}
         </div>
       )}
     </div>

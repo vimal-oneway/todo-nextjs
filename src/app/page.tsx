@@ -4,12 +4,13 @@ import { Container } from "@/components/Container";
 import { Navbar } from "@/components/Navbar";
 import { TodoCard } from "@/components/todo/TodoCard";
 import { TodoContainer } from "@/components/todo/TodoContainer";
+import { Login } from "@/components/Login";
 
 export default async function Home() {
   const todos = await getTodo();
 
   if (!todos) {
-    return <div>Loading...</div>;
+    return <Login />;
   }
 
   return (

@@ -12,7 +12,9 @@ export const TodoCard = ({ todo }: TodoCardProps) => {
       <div className="w-full mt-5 bg-gray-700 p-3 rounded-lg flex justify-between items-center">
         <div className="flex gap-2 items-center">
           <TodoDoneBtn done={todo.done} id={todo._id.toString()} />
-          <h3 className="text-xl">{todo.title}</h3>
+          <h3 className={todo.done ? "text-xl line-through" : "text-xl"}>
+            {todo.title}
+          </h3>
         </div>
         <TodoDeleteBtn id={todo._id.toString()} />
       </div>
